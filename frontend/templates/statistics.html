@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="statistics-container">
+    <div class="sidebar">
+        <h2>Statistics</h2>
+        <p>Total number of images: {{ total_images }}</p>
+        <p>Total number of users: {{ total_users }}</p>
+        <!-- Add other statistics here -->
+    </div>
+
+    <div class="chart-container">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <canvas id="myChart"></canvas>
+
+        <!-- Hidden elements to store the data -->
+        <div id="totalImages" style="display: none;">{{ total_images }}</div>
+        <div id="totalUsers" style="display: none;">{{ total_users }}</div>
+        <div id="totalCategories" style="display: none;">{{ total_categories }}</div>
+        <div id="imagesPerCategory" style="display: none;">{{ images_per_category|tojson|safe }}</div>
+
+        <script src="../static/script.js"></script>
+    </div>
+</div>
+{% endblock %}

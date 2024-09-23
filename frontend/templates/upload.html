@@ -1,0 +1,38 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card border-0 custom-shadow">
+        <div class="card-body p-5">
+            <h2 class="text-center mb-4">Upload Image</h2>
+            <form action="/images/" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select class="form-control" id="category" name="category" required>
+                        <option value="">Select a category</option>
+                        <option value="nature">Nature</option>  
+                        <option value="animals">Animals</option>
+                        <option value="people">People</option>
+                        <option value="cities">Cities</option>
+                        <option value="abstract">Abstract</option>
+                        <!-- Add more categories as needed -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="file">Select image</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="file" name="file" accept="image/*" required>
+                        <label class="custom-file-label" for="file">Choose file</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3 gradiente rounder border-0">Upload</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

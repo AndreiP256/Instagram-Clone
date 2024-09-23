@@ -1,0 +1,58 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Gallery
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid gallery-container d-flex">
+        <div class="categories">
+            <h2>Categories</h2>
+            <ul class="list-unstyled">
+                {% for category in categories %}
+                    <li>
+                        <form method="get">
+                            <input type="hidden" name="category" value="{{ category }}">
+                            <button type="submit" class="button-link category-button {% if category == selected_category %}selected{% endif %}">{{ category }}</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="flex-container">
+            {% if images|length == 0 %}
+                <p>No images in this category, be the first to add one!</p>
+            {% else %}
+                {% for image in images %}
+                    <div class="flex-item">
+                        <!-- Add a button or link to open the modal -->
+                        <button type="button" class="btn btn-primary image-button" data-toggle="modal" data-target="#imageModal{{ image.id }}">
+                            <img src="{{ url_for('main.read_image', image_id=image.id) }}" alt="{{ image.name }}" class="img-fluid">
+                        </button>
+
+                        <!-- The Modal -->
+                        <div class="modal fade" id="imageModal{{ image.id }}">
+                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">{{ image.name }}</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <img src="{{ url_for('main.read_image', image_id=image.id) }}" alt="{{ image.name }}" class="img-fluid">
+                                    </div>
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <p>Uploaded by: {{ image.user.username }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

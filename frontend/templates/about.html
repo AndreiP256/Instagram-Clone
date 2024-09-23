@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+
+{% block title %}
+    About
+{% endblock %}
+
+{% block content %}
+    <div class="about-content">
+        <h1 class="about-title">About Andrei Ionut Prusacov</h1>
+        <p class="about-text">Hello! My name is Andrei Ionut Prusacov. I'm a first-year student at ACS-CTI, and photography is one of my passions. I love capturing moments and turning them into lasting memories. Join me on this journey of exploration and discovery.</p>
+        <img class="about-image custom-shadow" src="{{ url_for('static', filename='images/about.jpg') }}" alt="About">
+    </div>
+{% endblock %}
